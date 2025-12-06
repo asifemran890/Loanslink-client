@@ -39,10 +39,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/plant/:id",
-        element: <PlantDetails />,
-      },
+
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
     ],

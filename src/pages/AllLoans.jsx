@@ -6,7 +6,7 @@ import Loans from "./Loans";
 
 const AllLoans = () => {
   const { data: loans = [], isLoading } = useQuery({
-    queryKey: ["plants"],
+    queryKey: ["loans"],
     queryFn: async () => {
       const result = await axios(`http://localhost:5000/loans`);
       console.log(result);
