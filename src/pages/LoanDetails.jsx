@@ -32,7 +32,7 @@ const LoanDetails = () => {
       <img
         src={ImagesUrl}
         alt="img"
-        className="w-full h-64 object-cover rounded mb-5"
+        className="w-full h-100 rounded mb-5"
       />
 
       <h1 className="text-3xl font-bold">{LoanTitle}</h1>

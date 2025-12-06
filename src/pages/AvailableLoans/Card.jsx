@@ -14,7 +14,7 @@ const Card = ({ loant }) => {
         <img
           src={ImagesUrl}
           alt="img"
-          className="w-full h-48 object-cover rounded-md"
+          className=" object-cover rounded-md"
         />
 
         <h2 className="text-xl font-semibold mt-4">{LoanTitle}</h2>

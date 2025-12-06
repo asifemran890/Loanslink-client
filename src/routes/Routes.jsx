@@ -2,7 +2,6 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import PlantDetails from "../pages/PlantDetails/PlantDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
@@ -16,6 +15,8 @@ import { createBrowserRouter } from "react-router";
 import AddLoan from "../pages/Dashboard/Seller/AddLoan";
 import AllLoans from "../pages/AllLoans";
 import LoanDetails from "../pages/LoanDetails";
+import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,8 @@ export const router = createBrowserRouter([
 
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
+      { path: "/about", element: <AboutUs /> },
+      { path: "/contact", element: <Contact /> },
     ],
   },
 
