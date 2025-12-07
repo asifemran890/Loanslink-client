@@ -12,6 +12,12 @@ import Contact from "../pages/NavberAllPages/Contact";
 import AllLoans from "../pages/NavberAllPages/AllLoans";
 import Profile from "../pages/Dashboard/Common/Profile";
 import MyLoans from "../pages/Dashboard/Common/MyLoans";
+import LoanApplications from "../pages/Dashboard/Common/LoanApplications";
+import AllLoan from "../pages/Dashboard/Common/AllLoan";
+import ManageUsers from "../pages/Dashboard/Common/ManageUsers";
+import ManageLoans from "../pages/Dashboard/Common/ManageLoans";
+import AddLoan from "../pages/Dashboard/Common/AddLoan";
+import PendingApplications from "../pages/Dashboard/Common/PendingApplications";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +64,22 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/my-loans",
         element: <MyLoans></MyLoans>,
-      }
+      },
+      {
+        path: "/dashboard/loan-applications",
+        element: <LoanApplications></LoanApplications>,
+      },
+      {
+        path: "/dashboard/all-loans",
+        element: <AllLoan />,
+      },
+      { path: "/dashboard/manage-users", element: <ManageUsers /> },
+      { path: "/dashboard/manage-loans", element: <ManageLoans /> },
+      { path: "/dashboard/add-loan", element: <AddLoan /> },
+      {
+        path: "/dashboard/pending-applications",
+        element: <PendingApplications />,
+      },
     ],
   },
 ]);

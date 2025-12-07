@@ -52,7 +52,7 @@ const Sidebar = () => {
                 <MenuItem
                   icon={BsGraphUp}
                   label="All Loans"
-                  address="/dashboard"
+                  address="/dashboard/all-loans"
                 />
                 <MenuItem
                   icon={FaUsers}
@@ -79,8 +79,8 @@ const Sidebar = () => {
                 />
                 <MenuItem
                   icon={MdHomeWork}
-                  label="My Inventory"
-                  address="my-inventory"
+                  label="Loan Applications"
+                  address="loan-applications"
                 />
                 <MenuItem
                   icon={MdOutlineManageHistory}

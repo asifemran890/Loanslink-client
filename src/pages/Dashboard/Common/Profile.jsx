@@ -4,8 +4,9 @@ import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
   const { user } = useAuth();
-  const [role] = useRole();
-  
+  const [role, isRoleLoading] = useRole();
+  console.log(role, isRoleLoading);
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
@@ -24,9 +25,9 @@ const Profile = () => {
           </a>
 
           <p className="p-2 px-4 text-xs text-white bg-lime-500 rounded-full">
-            {role}
+            costomer
           </p>
-          
+
           <div className="w-full p-2 mt-4 rounded-lg">
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
