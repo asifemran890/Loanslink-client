@@ -5,16 +5,17 @@ import { Link } from "react-router";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
-import { BsGraphUp } from "react-icons/bs";
+import { BsFillHouseAddFill, BsGraphUp } from "react-icons/bs";
+import { FaUserCog, FaUsers, FaUserTie } from "react-icons/fa";
 
 // User Menu
 import MenuItem from "./Menu/MenuItem";
-import AdminMenu from "./Menu/AdminMenu";
-import SellerMenu from "./Menu/SellerMenu";
-import CustomerMenu from "./Menu/CustomerMenu";
+
+import LoadingSpinner from "../../Shared/LoadingSpinner";
+import Container from "../../Shared/Container";
+import { MdHomeWork, MdOutlineManageHistory } from "react-icons/md";
 
 const Sidebar = () => {
-
   const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
@@ -36,36 +37,64 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div>
-        <div className="flex flex-col h-full">
-          {/* Middle Content */}
-          <div className="flex flex-col justify-between flex-1 mt-6">
-            {/*  Menu Items */}
-            <nav>
-              {/* Common Menu */}
-              <MenuItem
-                icon={BsGraphUp}
-                label="Statistics"
-                address="/dashboard"
-              />
-              {/* Role-Based Menu */}
-              <CustomerMenu />
-              <SellerMenu />
-              <AdminMenu />
-            </nav>
-          </div>
+        <Container>
+          <div className="flex flex-col h-full">
+            {/* Middle Content */}
+            <div className="flex flex-col justify-between flex-1 mt-6">
+              {/*  Menu Items */}
+              <nav>
+                {/* Common Menu */}
+                <MenuItem
+                  icon={FaUserTie}
+                  label="My Loans"
+                  address="my-loans"
+                />
+                <MenuItem
+                  icon={BsGraphUp}
+                  label="All Loans"
+                  address="/dashboard"
+                />
+                <MenuItem
+                  icon={FaUsers}
+                  label="Manage Users"
+                  address="/dashboard/manage-users"
+                />
+                <MenuItem
+                  icon={FaUserCog}
+                  label="Manage Loans"
+                  address="manage-loans"
+                />
+                <div>
+                  <MenuItem
+                    icon={FcSettings}
+                    label="Profile"
+                    address="/dashboard/profile"
+                  />
+                </div>
 
-          {/* Bottom Content */}
-          <div>
-            <hr />
+                <MenuItem
+                  icon={BsFillHouseAddFill}
+                  label="Add Loan"
+                  address="add-loan"
+                />
+                <MenuItem
+                  icon={MdHomeWork}
+                  label="My Inventory"
+                  address="my-inventory"
+                />
+                <MenuItem
+                  icon={MdOutlineManageHistory}
+                  label="Pending Applications"
+                  address="pending-applications"
+                />
 
-            <MenuItem
-              icon={FcSettings}
-              label="Profile"
-              address="/dashboard/profile"
-            />
-            
+                {/* Role-Based Menu */}
+              </nav>
+            </div>
+
+            {/* Bottom Content */}
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );

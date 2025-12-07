@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../components/Shared/LoadingSpinner";
 import { useParams } from "react-router";
 import axios from "axios";
 import { useState } from "react";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const LoanDetails = () => {
   const { id } = useParams();
