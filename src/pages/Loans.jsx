@@ -12,7 +12,7 @@ const Loans = ({ loant }) => {
         key={loant.id}
         className="bg-white shadow-md rounded-lg p-2 border border-gray-200"
       >
-        <img src={ImagesUrl} alt="img" className=" p-5 rounded-md" />
+        <img src={ImagesUrl} alt="img" className="  rounded-md" />
         <div className="pl-5">
           <h2 className="text-xl font-semibold mt-4">{LoanTitle}</h2>
           <p className="text-gray-600">Category: {Category}</p>

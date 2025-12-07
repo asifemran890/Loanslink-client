@@ -9,7 +9,7 @@ import Profile from "../pages/Dashboard/Common/Profile";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import MainLayout from "../layouts/MainLayout";
 import MyInventory from "../pages/Dashboard/Seller/MyInventory";
-import ManageOrders from "../pages/Dashboard/Seller/ManageOrders";
+import ManageOrders from "../pages/Dashboard/Seller/PendingApplications";
 import MyOrders from "../pages/Dashboard/Customer/MyOrders";
 import { createBrowserRouter } from "react-router";
 import AddLoan from "../pages/Dashboard/Seller/AddLoan";
@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-inventory",
+        path: "my-loans",
         element: (
           <PrivateRoute>
             <MyInventory />
@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage-users",
+        path: "manage-loans",
         element: (
           <PrivateRoute>
             <ManageUsers />
@@ -105,7 +105,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage-orders",
+        path: "pending-applications",
         element: <ManageOrders />,
       },
     ],
