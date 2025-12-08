@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Loans from "./Loans";
+import Loans from "../Dashboard/Common/Loans";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const AllLoans = () => {

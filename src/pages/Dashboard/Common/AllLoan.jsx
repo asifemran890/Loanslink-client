@@ -2,7 +2,8 @@ import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
-import Loans from "../../NavberAllPages/Loans";
+import Loans from "../Common/Loans";
+
 
 const AllLoans = () => {
   const { data: loans = [], isLoading } = useQuery({

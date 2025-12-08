@@ -132,18 +132,6 @@ const SignUp = () => {
               />
             </div>
 
-            {/* Role dropdown */}
-            <div>
-              <label className="block mb-2 text-sm">Role</label>
-              <input
-                type="text"
-                name="Role"
-                placeholder="Enter Your Role Here"
-                required
-                className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300"
-              />
-            </div>
-
             {/* Email */}
             <div>
               <label className="block mb-2 text-sm">Email address</label>

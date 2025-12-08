@@ -46,8 +46,8 @@ const Sidebar = () => {
             <div className="flex flex-col justify-between flex-1 mt-6">
               {/*  Menu Items */}
               <nav>
-                {/* Customer Menu */}
-                {role === "custome" && (
+                
+                {/* {role === "custome" && (
                   <>
                     <MenuItem
                       icon={FaUserTie}
@@ -55,15 +55,20 @@ const Sidebar = () => {
                       address="my-loans"
                     />
                     <MenuItem
+                      icon={MdHomeWork}
+                      label="Loan Applications"
+                      address="loan-applications"
+                    />
+                    <MenuItem
                       icon={FcSettings}
                       label="Profile"
                       address="/dashboard/profile"
                     />
                   </>
-                )}
+                )} */}
 
                 {/* Manager Menu */}
-                {role === "manager" && (
+                {/* {role === "manager" && (
                   <>
                     <MenuItem
                       icon={BsFillHouseAddFill}
@@ -86,10 +91,10 @@ const Sidebar = () => {
                       address="/dashboard/profile"
                     />
                   </>
-                )}
+                )} */}
 
                 {/* Admin Menu */}
-                {role === "admin" && (
+                {/* {role === "admin" && (
                   <>
                     {" "}
                     <MenuItem
@@ -102,14 +107,9 @@ const Sidebar = () => {
                       label="Manage Users"
                       address="/dashboard/manage-users"
                     />{" "}
-                    <MenuItem
-                      icon={MdHomeWork}
-                      label="Loan Applications"
-                      address="loan-applications"
-                    />
                   </>
-                )}
-                {/* Common Menu
+                )} */}
+                {/* Common Menu */}
                 <MenuItem
                   icon={FaUserTie}
                   label="My Loans"
@@ -152,7 +152,7 @@ const Sidebar = () => {
                   icon={MdOutlineManageHistory}
                   label="Pending Applications"
                   address="pending-applications"
-                /> */}
+                />
 
                 {/* Role-Based Menu */}
               </nav>

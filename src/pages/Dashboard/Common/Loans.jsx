@@ -19,7 +19,7 @@ const Loans = ({ loant }) => {
           <p className="text-gray-600">Interest: {InterestRate}</p>
           <p className="text-gray-600">Max Limit: {MaxLoanLimit}</p>
         </div>
-        <Link to={`/loans/${_id}`}>
+        <Link to={`/dashboard/loans/${_id}`}>
           <button className="mt-4 w-full bg-lime-600 text-white py-2 rounded-md hover:bg-lime-700">
             View Details
           </button>
