@@ -14,8 +14,11 @@ import MenuItem from "./Menu/MenuItem";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import Container from "../../Shared/Container";
 import { MdHomeWork, MdOutlineManageHistory } from "react-icons/md";
+import useRole from "../../../hooks/useRole";
 
 const Sidebar = () => {
+  const [role, isRoleLoading] = useRole();
+  console.log(role, isRoleLoading);
   const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
@@ -43,7 +46,70 @@ const Sidebar = () => {
             <div className="flex flex-col justify-between flex-1 mt-6">
               {/*  Menu Items */}
               <nav>
-                {/* Common Menu */}
+                {/* Customer Menu */}
+                {role === "custome" && (
+                  <>
+                    <MenuItem
+                      icon={FaUserTie}
+                      label="My Loans"
+                      address="my-loans"
+                    />
+                    <MenuItem
+                      icon={FcSettings}
+                      label="Profile"
+                      address="/dashboard/profile"
+                    />
+                  </>
+                )}
+
+                {/* Manager Menu */}
+                {role === "manager" && (
+                  <>
+                    <MenuItem
+                      icon={BsFillHouseAddFill}
+                      label="Add Loan"
+                      address="add-loan"
+                    />
+                    <MenuItem
+                      icon={FaUserCog}
+                      label="Manage Loans"
+                      address="manage-loans"
+                    />
+                    <MenuItem
+                      icon={MdOutlineManageHistory}
+                      label="Pending Applications"
+                      address="pending-applications"
+                    />
+                    <MenuItem
+                      icon={FcSettings}
+                      label="Profile"
+                      address="/dashboard/profile"
+                    />
+                  </>
+                )}
+
+                {/* Admin Menu */}
+                {role === "admin" && (
+                  <>
+                    {" "}
+                    <MenuItem
+                      icon={BsGraphUp}
+                      label="All Loans"
+                      address="/dashboard/all-loans"
+                    />{" "}
+                    <MenuItem
+                      icon={FaUsers}
+                      label="Manage Users"
+                      address="/dashboard/manage-users"
+                    />{" "}
+                    <MenuItem
+                      icon={MdHomeWork}
+                      label="Loan Applications"
+                      address="loan-applications"
+                    />
+                  </>
+                )}
+                {/* Common Menu
                 <MenuItem
                   icon={FaUserTie}
                   label="My Loans"
@@ -86,7 +152,7 @@ const Sidebar = () => {
                   icon={MdOutlineManageHistory}
                   label="Pending Applications"
                   address="pending-applications"
-                />
+                /> */}
 
                 {/* Role-Based Menu */}
               </nav>
