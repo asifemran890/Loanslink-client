@@ -12,6 +12,7 @@ const LoanApplication = () => {
     userEmail: user?.email,
     loanTitle: loanData?.LoanTitle,
     interestRate: loanData?.InterestRate,
+    loanAmount: loanData?.MaxLoanLimit,
   };
 
   // Form state
@@ -22,10 +23,10 @@ const LoanApplication = () => {
     nationalId: "",
     incomeSource: "",
     monthlyIncome: "",
-    loanAmount: "",
     reason: "",
     address: "",
     extraNotes: "",
+    loanId: "",
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -36,26 +37,6 @@ const LoanApplication = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  // Placeholder functions for database actions
-  const saveLoanApplication = async (data) => {
-    // Replace with your API call
-    console.log("Saving loan application:", data);
-    return Promise.resolve({ id: "loan123" }); // simulate saved ID
-  };
-
-  const addLoanToBorrower = async (loanId) => {
-    // Replace with your API call
-    console.log("Adding loan to borrower:", loanId);
-    return Promise.resolve();
-  };
-
-  const addLoanToPendingLoans = async (loanId) => {
-    // Replace with your API call
-    console.log("Adding loan to pending loans:", loanId);
-    return Promise.resolve();
-  };
-
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,19 +44,6 @@ const LoanApplication = () => {
     setSuccessMsg("");
     setErrorMsg("");
     try {
-      // Combine all data
-      const loanData = {
-        ...autofilledData,
-        ...formData,
-      };
-      // Save to database
-      const savedLoan = await saveLoanApplication(loanData);
-      const loanId = savedLoan.id;
-
-      // Update borrower and pending loans
-      await addLoanToBorrower(loanId);
-      await addLoanToPendingLoans(loanId);
-
       setSuccessMsg("Loan application submitted successfully!");
       // Reset form if needed
       setFormData({
@@ -104,18 +72,15 @@ const LoanApplication = () => {
         name: user?.displayName,
         photoURL: user?.photoURL,
         email: user?.email,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        contactNumber: formData.contactNumber,
-        nationalId: formData.nationalId,
-        incomeSource: formData.incomeSource,
-        monthlyIncome: formData.monthlyIncome,
-        loanAmount: formData.loanAmount,
-        reason: formData.reason,
-        address: formData.address,
-        extraNotes: formData.extraNotes,
-      });
+        loanTitle: autofilledData.loanTitle,
+        interestRate: autofilledData.interestRate,
 
+        ...formData,
+        status: "Pending",
+        applicationFeeStatus: "Unpaid",
+        customeEmail: user?.email,
+        createdAt: new Date().toISOString(),
+      });
       toast.success("Loan Application Successful");
     } catch (err) {
       console.log(err);
@@ -136,7 +101,7 @@ const LoanApplication = () => {
             <label className="block font-semibold mb-1">User Email</label>
             <input
               type="text"
-              value={autofilledData.userEmail}
+              value={user?.email}
               readOnly
               className="w-full p-2 border border-gray-300 rounded bg-gray-100"
             />
