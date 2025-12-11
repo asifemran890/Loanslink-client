@@ -29,7 +29,7 @@ const LoanApplication = () => {
     loanId: "",
   });
 
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState();
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -102,7 +102,6 @@ const LoanApplication = () => {
             <input
               type="text"
               value={user?.email}
-              readOnly
               className="w-full p-2 border border-gray-300 rounded bg-gray-100"
             />
           </div>
@@ -111,7 +110,6 @@ const LoanApplication = () => {
             <input
               type="text"
               value={autofilledData.loanTitle}
-              readOnly
               className="w-full p-2 border border-gray-300 rounded bg-gray-100"
             />
           </div>
@@ -120,7 +118,6 @@ const LoanApplication = () => {
             <input
               type="text"
               value={autofilledData.interestRate}
-              readOnly
               className="w-full p-2 border border-gray-300 rounded bg-gray-100"
             />
           </div>

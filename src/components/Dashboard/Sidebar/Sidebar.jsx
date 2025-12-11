@@ -46,9 +46,14 @@ const Sidebar = () => {
             <div className="flex flex-col justify-between flex-1 mt-6">
               {/*  Menu Items */}
               <nav>
-                
                 {/* {role === "custome" && (
                   <>
+                    {" "}
+                    <MenuItem
+                      icon={BsGraphUp}
+                      label="All Loans"
+                      address="/dashboard/all-loans"
+                    />
                     <MenuItem
                       icon={FaUserTie}
                       label="My Loans"
@@ -71,15 +76,16 @@ const Sidebar = () => {
                 {/* {role === "manager" && (
                   <>
                     <MenuItem
-                      icon={BsFillHouseAddFill}
-                      label="Add Loan"
-                      address="add-loan"
-                    />
-                    <MenuItem
                       icon={FaUserCog}
                       label="Manage Loans"
                       address="manage-loans"
                     />
+                    <MenuItem
+                      icon={BsFillHouseAddFill}
+                      label="Add Loan"
+                      address="add-loan"
+                    />
+                   
                     <MenuItem
                       icon={MdOutlineManageHistory}
                       label="Pending Applications"
@@ -96,12 +102,11 @@ const Sidebar = () => {
                 {/* Admin Menu */}
                 {/* {role === "admin" && (
                   <>
-                    {" "}
                     <MenuItem
                       icon={BsGraphUp}
                       label="All Loans"
                       address="/dashboard/all-loans"
-                    />{" "}
+                    />
                     <MenuItem
                       icon={FaUsers}
                       label="Manage Users"
@@ -153,8 +158,11 @@ const Sidebar = () => {
                   label="Pending Applications"
                   address="pending-applications"
                 />
-
-                {/* Role-Based Menu */}
+                <MenuItem
+                  icon={MdOutlineManageHistory}
+                  label="Approved Loans"
+                  address="approved-loans"
+                />
               </nav>
             </div>
 

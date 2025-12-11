@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import Button from "../../components/Shared/Button/Button";
 
 const ErrorPage = () => {
   const navigate = useNavigate();

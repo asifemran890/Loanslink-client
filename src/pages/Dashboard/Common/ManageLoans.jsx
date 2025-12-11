@@ -33,7 +33,6 @@ const ManageLoans = () => {
             <th className="p-2 border">Interest</th>
             <th className="p-2 border">Category</th>
             <th className="p-2 border">Actions</th>
-            <th className="p-2 border">Update</th>
             <th className="p-2 border">Delete</th>
           </tr>
         </thead>

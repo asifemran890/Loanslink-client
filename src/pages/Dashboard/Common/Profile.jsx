@@ -7,11 +7,11 @@ const Profile = () => {
   console.log(role, isRoleLoading);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
+    <div className="flex justify-center  items-center h-screen">
+      <div className="bg-blue-200 shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
         <img
           alt="cover photo"
-          src=""
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt05d5mk8OWdVcqLMS94uvYMNuXRSXiJlVbA&s"
           className="w-full mb-4 rounded-t-lg h-56"
         />
         <div className="flex flex-col items-center justify-center p-4 -mt-16">

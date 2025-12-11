@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-const ManageUsers = () => {
+export default function ApprovedLoans() {
   const [loans, setLoans] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("http://localhost:5000/loanapplication")
       .then((res) => res.json())
       .then((data) => setLoans(data))
       .catch((err) => console.error(err));
@@ -12,44 +12,53 @@ const ManageUsers = () => {
   console.log(loans);
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Manage Users</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Approved Loans</h1>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50 text-center">
             <tr>
               <th className="px-6  text-center py-3 border text-xs font-bold  uppercase tracking-wider">
-                Name
+                Loan ID
               </th>
               <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
-                Email
+                User Info
               </th>
               <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
-                Role
+                Amount
               </th>
-
+              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
+                Approved Date
+              </th>
               <th className="px-6 py-3  border text-center text-xs font-bold uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {loans.map((user) => (
-              <tr key={user._id}>
+            {loans.map((loan) => (
+              <tr key={loan._id}>
                 <td className="px-6 border text-center py-4 whitespace-nowrap">
-                  {user.name}
+                  {loan._id}
                 </td>
                 <td className="px-6 py-4 text-center border whitespace-nowrap text-sm text-gray-500">
-                  {user.email}
+                  {loan.name} , {loan.email}
                 </td>
                 <td className="px-6 py-4 border text-center  whitespace-nowrap">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                    {user.role}
+                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ">
+                    {loan.loanAmount}
                   </span>
                 </td>
-                <td className="px-6 py-4 border text-center  whitespace-nowrap">
+                <td className="px-6 border py-4 whitespace-nowrap">
+                  {/* Highlight 'Suspended' status */}
+
+                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ">
+                    {loan.createdAt}
+                  </span>
+                </td>
+                <td className="px-6 border text-center py-4 whitespace-nowrap">
                   <button
                     // onClick={() => onUpdate(loans)}
-                    className="text-indigo-600   hover:text-indigo-900 font-medium"
+                    className="text-indigo-600 hover:text-indigo-900 font-medium"
                   >
                     Update
                   </button>
@@ -61,6 +70,4 @@ const ManageUsers = () => {
       </div>
     </div>
   );
-};
-
-export default ManageUsers;
+}

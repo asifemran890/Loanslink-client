@@ -1,19 +1,34 @@
-const ManageLoansDetails = ({ loan }) => {
-  //   let [isOpen, setIsOpen] = useState(false)
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { FaTrash } from "react-icons/fa6";
 
-  const { InterestRate, LoanTitle, Category, ImagesUrl } = loan || {};
+const ManageLoansDetails = ({ loan }) => {
+  const [loans, setLoans] = useState([]);
+
+  const { InterestRate, LoanTitle, Category, ImagesUrl, _id } = loan || {};
+  const handleDelete = async () => {
+    const confirmDelete = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00C951",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (confirmDelete.isConfirmed) {
+      const res = await fetch(`http://localhost:5000/loans/${_id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.deletedCount > 0) {
+        setLoans(loans.filter((item) => item._id !== _id));
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+      }
+    }
+  };
 
   return (
-    // <thead className="bg-gray-100">
-    //   <tr>
-    //     <th className="p-2 border">{ImagesUrl}</th>
-    //     <th className="p-2 border">{LoanTitle}</th>
-    //     <th className="p-2 border">{Category}</th>
-    //     <th className="p-2 border">{InterestRate}</th>
-    //     <th className="p-2 border">Actions</th>
-    //   </tr>
-
-    // </thead>
     <tr>
       <td className="border-b  border p-5 border-gray-200 bg-white text-sm">
         <img className="h-10 w-10" src={ImagesUrl} alt="img" />
@@ -33,13 +48,11 @@ const ManageLoansDetails = ({ loan }) => {
       </td>
 
       <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
-        <button className="bg-blue-500 text-white px-3 py-1 rounded">
-          Update
-        </button>
-      </td>
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
-        <button className="bg-red-500  text-white px-3 py-1 rounded">
-          Delete
+        <button
+          onClick={() => handleDelete(loans._id)}
+          className="bg-red-500 flex items-center gap-2 text-white px-3 py-1 rounded"
+        >
+          <FaTrash /> Delete
         </button>
       </td>
     </tr>
