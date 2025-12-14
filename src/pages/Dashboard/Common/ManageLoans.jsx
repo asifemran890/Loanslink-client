@@ -5,7 +5,7 @@ const ManageLoans = () => {
   const [loans, setLoans] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/loans")
+    fetch("https://backend-bay-tau-10.vercel.app/loans")
       .then((res) => res.json())
       .then((data) => setLoans(data))
       .catch((err) => console.error(err));
@@ -15,19 +15,9 @@ const ManageLoans = () => {
   return (
     <div className="p-3">
       <h2 className="text-xl p-3  font-bold text-center mb-4">Manage Loans</h2>
-
-      {/* Search */}
-      {/* <input
-        type="text"
-        placeholder="Search by title or category"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-4 px-4 py-2 border rounded w-full max-w-sm"
-      /> */}
-
       <table className="min-w-full border border-gray-200">
-        <thead className="bg-gray-100">
-          <tr>
+        <thead className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm mt-6">
+          <tr className="bg-blue-500 p-5 text-white  font-bold">
             <th className="p-2 border">Image</th>
             <th className="p-2 border">Title</th>
             <th className="p-2 border">Interest</th>

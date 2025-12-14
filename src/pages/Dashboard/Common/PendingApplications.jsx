@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 export default function PendingApplications() {
@@ -7,7 +6,7 @@ export default function PendingApplications() {
   const [selectedLoan, setSelectedLoan] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/loanapplication")
+    fetch("https://backend-bay-tau-10.vercel.app/loanapplication")
       .then((res) => res.json())
       .then((data) => setLoans(data))
       .catch((err) => console.error(err));
@@ -15,11 +14,14 @@ export default function PendingApplications() {
 
   const handleApprove = async (loanId) => {
     const timestamp = new Date().toISOString();
-    await fetch(`http://localhost:5000/loanapplication/${loanId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "Approved", approvedAt: timestamp }),
-    });
+    await fetch(
+      `https://backend-bay-tau-10.vercel.app/loanapplication/${loanId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "Approved", approvedAt: timestamp }),
+      }
+    );
     // Refresh data after update
     setLoans((prevLoans) =>
       prevLoans.map((loan) =>
@@ -31,11 +33,14 @@ export default function PendingApplications() {
   };
 
   const handleReject = async (loanId) => {
-    await fetch(`http://localhost:5000/loanapplication/${loanId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "Rejected" }),
-    });
+    await fetch(
+      `https://backend-bay-tau-10.vercel.app/loanapplication/${loanId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "Rejected" }),
+      }
+    );
     // Refresh data after update
     setLoans((prevLoans) =>
       prevLoans.map((loan) =>
@@ -61,7 +66,7 @@ export default function PendingApplications() {
       </h1>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50 text-center">
+          <thead className="bg-blue-500 text-white  font-bold">
             <tr>
               <th className="px-6  text-center py-3 border text-xs font-bold  uppercase tracking-wider">
                 Loan ID

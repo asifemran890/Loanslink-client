@@ -3,3 +3,7 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
+
+body {
+  background-color: bg-base-300;
+}

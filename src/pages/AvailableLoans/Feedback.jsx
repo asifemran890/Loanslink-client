@@ -83,7 +83,7 @@ const Feedback = () => {
   ];
 
   const CreateCard = ({ card }) => (
-    <div className="p-4 rounded-lg mx-4  shadow hover:shadow-lg transition-all duration-200 w-72 bg-amber-50 shrink-0">
+    <div className="p-4 rounded-lg mx-4  bg-slate-300  shadow hover:shadow-lg transition-all duration-200 w-72  shrink-0">
       <div className="flex gap-2">
         <img
           className="size-11 rounded-full"
@@ -123,7 +123,7 @@ const Feedback = () => {
   );
 
   return (
-    <section className="w-full mx-auto pt-10 pb-10 bg-emerald-200">
+    <section className="w-full mx-auto pt-10 pb-10 ">
       <div className="text-center">
         <h2 className="text-4xl font-bold    mb-3">
           Customer Feedback
@@ -150,9 +150,9 @@ const Feedback = () => {
             }
         `}</style>
 
-      <div className="marquee-row w-full mx-auto max-w-full overflow-hidden relative">
+      <div className="marquee-row w-full  mx-auto max-w-full overflow-hidden relative">
         <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none  to-transparent"></div>
-        <div className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5">
+        <div className="marquee-inner  flex transform-gpu min-w-[200%] pt-10 pb-5">
           {[...cardsData, ...cardsData].map((card, index) => (
             <CreateCard key={index} card={card} />
           ))}

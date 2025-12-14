@@ -7,7 +7,7 @@ const Profile = () => {
   console.log(role, isRoleLoading);
 
   return (
-    <div className="flex justify-center  items-center h-screen">
+    <div className="flex justify-center  items-center lg:h-screen">
       <div className="bg-blue-200 shadow-lg rounded-2xl md:w-4/5 lg:w-3/5">
         <img
           alt="cover photo"

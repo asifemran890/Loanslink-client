@@ -17,9 +17,12 @@ const ManageLoansDetails = ({ loan }) => {
       confirmButtonText: "Yes, delete it!",
     });
     if (confirmDelete.isConfirmed) {
-      const res = await fetch(`http://localhost:5000/loans/${_id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://backend-bay-tau-10.vercel.app/loans/${_id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.deletedCount > 0) {
         setLoans(loans.filter((item) => item._id !== _id));
@@ -30,27 +33,27 @@ const ManageLoansDetails = ({ loan }) => {
 
   return (
     <tr>
-      <td className="border-b  border p-5 border-gray-200 bg-white text-sm">
-        <img className="h-10 w-10" src={ImagesUrl} alt="img" />
+      <td className=" px-5 py-3 bg-white  border  text-gray-800  ">
+        <img className="h-20 w-full" src={ImagesUrl} alt="img" />
       </td>
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
+      <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
         <p className="text-gray-900 ">{LoanTitle}</p>
       </td>
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
+      <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
         <p className="text-gray-900 ">{Category}</p>
       </td>
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
+      <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
         <p className="text-gray-900 ">{InterestRate}</p>
       </td>
 
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
+      <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
         <p className="text-gray-900 ">Active</p>
       </td>
 
-      <td className="px-5 py-5 border border-gray-200 bg-white text-sm">
+      <td className="pl-6 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
         <button
           onClick={() => handleDelete(loans._id)}
-          className="bg-red-500 flex items-center gap-2 text-white px-3 py-1 rounded"
+          className="bg-red-500 flex items-center  text-white px-3 py-1 rounded"
         >
           <FaTrash /> Delete
         </button>

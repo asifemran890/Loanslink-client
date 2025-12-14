@@ -8,7 +8,9 @@ const AvailableLoans = () => {
   const { data: loans = [], isLoading } = useQuery({
     queryKey: ["loans"],
     queryFn: async () => {
-      const result = await axios(`http://localhost:5000/latest-loans`);
+      const result = await axios(
+        `https://backend-bay-tau-10.vercel.app/latest-loans`
+      );
       console.log(result);
       return result.data;
     },

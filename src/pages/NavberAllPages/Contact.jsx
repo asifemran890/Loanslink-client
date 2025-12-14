@@ -32,7 +32,7 @@ const Contact = () => {
           <h3 className=" text-xl font-semibold mb-2">Contact Us</h3>
           <p>Landline : +8801307251436</p>
           <p>Mobile : +8801307251436</p>
-          <p>Email : looanslink@gmail.com</p>
+          <p>Email : loanslink@gmail.com</p>
         </div>
 
         {/* RIGHT SECTION - FORM */}
@@ -82,7 +82,7 @@ const Contact = () => {
               onSubmit={handleSubscribe}
               className="flex items-center  gap-2  rounded-md "
             >
-              <button className="btn-primary bg-blue-300 p-4 rounded-2xl">Send Message</button>
+              <button className="btn btn-primary  p-4 rounded-2xl">Send Message</button>
             </form>
           </div>
         </div>

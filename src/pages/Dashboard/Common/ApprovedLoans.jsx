@@ -4,7 +4,7 @@ export default function ApprovedLoans() {
   const [loans, setLoans] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/loanapplication")
+    fetch("https://backend-bay-tau-10.vercel.app/loanapplication")
       .then((res) => res.json())
       .then((data) => setLoans(data))
       .catch((err) => console.error(err));
@@ -15,7 +15,7 @@ export default function ApprovedLoans() {
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Approved Loans</h1>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50 text-center">
+          <thead className="bg-blue-500 text-white  font-bold">
             <tr>
               <th className="px-6  text-center py-3 border text-xs font-bold  uppercase tracking-wider">
                 Loan ID

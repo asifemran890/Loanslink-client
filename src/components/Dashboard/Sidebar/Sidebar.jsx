@@ -7,48 +7,44 @@ import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsFillHouseAddFill, BsGraphUp } from "react-icons/bs";
 import { FaUserCog, FaUsers, FaUserTie } from "react-icons/fa";
+import { MdHomeWork, MdOutlineManageHistory } from "react-icons/md";
 
-// User Menu
 import MenuItem from "./Menu/MenuItem";
-
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import Container from "../../Shared/Container";
-import { MdHomeWork, MdOutlineManageHistory } from "react-icons/md";
 import useRole from "../../../hooks/useRole";
 
 const Sidebar = () => {
   const [role, isRoleLoading] = useRole();
-  console.log(role, isRoleLoading);
   const [isActive, setActive] = useState(false);
 
-  // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
-
+  if (isRoleLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <>
-      {/* Small Screen Navbar, only visible till md breakpoint */}
-      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
+      {/* Mobile Header */}
+      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden shadow-md">
         <button
           onClick={handleToggle}
           className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
         >
-          <AiOutlineBars className="h-5 w-5" />
+          <AiOutlineBars className="h-6 w-6" />
         </button>
       </div>
 
       {/* Sidebar */}
-      <div>
+      <div
+        className={`fixed md:static top-5 left-0 h-full z-40 shadow-lg transform transition-transform duration-300
+        ${isActive ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+      >
         <Container>
-          <div className="flex flex-col h-full">
-            {/* Middle Content */}
+          <div className="flex flex-col h-full p-4">
             <div className="flex flex-col justify-between flex-1 mt-6">
-              {/*  Menu Items */}
-              <nav>
-                {/* {role === "custome" && (
+              <nav className="flex flex-col gap-2">
+                {role === "custome" && (
                   <>
-                    {" "}
                     <MenuItem
                       icon={BsGraphUp}
                       label="All Loans"
@@ -70,10 +66,9 @@ const Sidebar = () => {
                       address="/dashboard/profile"
                     />
                   </>
-                )} */}
+                )}
 
-                {/* Manager Menu */}
-                {/* {role === "manager" && (
+                {role === "manager" && (
                   <>
                     <MenuItem
                       icon={FaUserCog}
@@ -85,7 +80,6 @@ const Sidebar = () => {
                       label="Add Loan"
                       address="add-loan"
                     />
-                   
                     <MenuItem
                       icon={MdOutlineManageHistory}
                       label="Pending Applications"
@@ -97,10 +91,9 @@ const Sidebar = () => {
                       address="/dashboard/profile"
                     />
                   </>
-                )} */}
+                )}
 
-                {/* Admin Menu */}
-                {/* {role === "admin" && (
+                {role === "admin" && (
                   <>
                     <MenuItem
                       icon={BsGraphUp}
@@ -111,11 +104,33 @@ const Sidebar = () => {
                       icon={FaUsers}
                       label="Manage Users"
                       address="/dashboard/manage-users"
-                    />{" "}
+                    />
                   </>
-                )} */}
-                {/* Common Menu */}
-                <MenuItem
+                )}
+              </nav>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      {/* Overlay for mobile */}
+      {isActive && (
+        <div
+          onClick={handleToggle}
+          className="fixed inset-0 bg-blue-400 bg-opacity-40 md:hidden z-30"
+        ></div>
+      )}
+    </>
+  );
+};
+
+export default Sidebar;
+
+{
+  /* Common Menu */
+}
+{
+  /* <MenuItem
                   icon={FaUserTie}
                   label="My Loans"
                   address="my-loans"
@@ -162,16 +177,5 @@ const Sidebar = () => {
                   icon={MdOutlineManageHistory}
                   label="Approved Loans"
                   address="approved-loans"
-                />
-              </nav>
-            </div>
-
-            {/* Bottom Content */}
-          </div>
-        </Container>
-      </div>
-    </>
-  );
-};
-
-export default Sidebar;
+                /> */
+}

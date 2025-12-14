@@ -4,12 +4,11 @@ import axios from "axios";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import Loans from "../Common/Loans";
 
-
 const AllLoans = () => {
   const { data: loans = [], isLoading } = useQuery({
     queryKey: ["loans"],
     queryFn: async () => {
-      const result = await axios(`http://localhost:5000/loans`);
+      const result = await axios(`https://backend-bay-tau-10.vercel.app/loans`);
       console.log(result);
       return result.data;
     },

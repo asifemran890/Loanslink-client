@@ -89,8 +89,8 @@ const LoanApplication = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 mt-3 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Loan Application Form</h2>
+    <div className="max-w-5xl mx-auto p-6 mt-3 bg-white rounded shadow">
+      <h2 className="text-2xl font-bold mb-6  text-center">Loan Application Form</h2>
       {successMsg && <div className="mb-4 text-green-600">{successMsg}</div>}
       {errorMsg && <div className="mb-4 text-red-600">{errorMsg}</div>}
 

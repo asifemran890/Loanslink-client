@@ -1,48 +1,125 @@
 import React from "react";
-import logo from "../../../assets/images/logo-flat.png"; // replace with your logo path
+import { Link } from "react-router";
+import logoImg from "../../../assets/images/logo-flat.png";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 mt-5 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-4">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-6">
-        {/* Logo and Description */}
-        <div className="flex flex-col items-start gap-2">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg" />
-            <h1 className="font-bold text-xl">LoanLink</h1>
+    <footer className="text-gray-100 bg-gray-700 mt-2 py-6">
+      <div className="grid grid-cols-1 place-items-center pb-6 border-b border-gray-600/50">
+        <img
+          className="w-14 h-14 rounded-full mb-1"
+          src={logoImg}
+          alt="SkillSwap Logo"
+        />
+        <h1 className="text-3xl font-extrabold ">Loanlink</h1>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-6 py-6 text-center">
+        <div className>
+          <h2 className="font-bold text-lg mb-2 text-yellow-400">Contact Us</h2>
+          <div className="space-y-1 text-sm">
+            <p>
+              Email:{" "}
+              <a
+                href="mailto:loanslink@gmail.com"
+                className="hover:text-yellow-300"
+              >
+                loanslink@gmail.com
+              </a>
+            </p>
+            <p>Phone: +880 1307251436</p>
+            <p>Address: 123 loanlink Street, Dhaka, Bangladesh</p>
           </div>
-          <p className="max-w-sm text-gray-600 dark:text-gray-400">
-            LoanLink helps you find the best loan options quickly and securely.
-            Compare rates, explore options, and manage your finances
-            effortlessly.
-          </p>
         </div>
 
-        {/* Useful Links */}
-        <div className="flex flex-col gap-2">
-          <h2 className="font-semibold text-lg">Useful Links</h2>
-          <a href="/" className="hover:text-blue-600">
-            Home
-          </a>
-          <a href="/all-loans" className="hover:text-blue-600">
-            All Loans
-          </a>
-          <a href="/about" className="hover:text-blue-600">
-            About Us
-          </a>
-          <a href="/contact" className="hover:text-blue-600">
-            Contact
-          </a>
-          <a href="/login" className="hover:text-blue-600">
-            Login
-          </a>
+        <div className>
+          <h2 className="font-bold text-lg mb-2 text-yellow-400">
+            Quick Links
+          </h2>
+          <ul className="space-y-1 text-sm">
+            <li>
+              <Link to="/" className="hover:underline hover:text-yellow-300">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/loans"
+                className="hover:underline hover:text-yellow-300"
+              >
+                All Loans
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/profile"
+                className="hover:underline hover:text-yellow-300"
+              >
+                My Profile
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard"
+                className="hover:underline hover:text-yellow-300"
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="hover:underline hover:text-yellow-300"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className>
+          <h2 className="font-bold text-lg mb-2 text-yellow-400">Follow Us</h2>
+          <div className="flex gap-3 text-xl mt-1 justify-center">
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-600 transition duration-200"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="https://www.x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition duration-200"
+            >
+              <FaXTwitter />
+            </a>
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-pink-600 transition duration-200"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400 transition duration-200"
+            >
+              <FaLinkedinIn />
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-300 flex justify-center gap-2 dark:border-gray-700 mt-8 pt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-        &copy; {new Date().getFullYear()} LoanLink. All rights reserved.
-        <h1>Develoy- Asif Emran</h1>
+      <div className="text-center mt-4 pt-4 border-t border-gray-600/50 text-sm text-gray-400">
+        &copy; 2025 Loanslink. All rights reserved.
       </div>
     </footer>
   );

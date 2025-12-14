@@ -23,13 +23,16 @@ const AddLoan = () => {
           .map((doc) => doc.trim());
       }
 
-      const response = await fetch("http://localhost:5000/loans", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://backend-bay-tau-10.vercel.app/loans",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create loan");
@@ -45,20 +48,23 @@ const AddLoan = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
+    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-white">
+      <div>
+        <h1 className=" text-6xl  ">Add Loan </h1>
+      </div>{" "}
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-5xl p-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="space-y-6">
             {/* Loan Title */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="LoanTitle" className="block text-gray-600">
+              <label htmlFor="LoanTitle" className="block font-bold  ">
                 Loan Title
               </label>
               <input
                 id="LoanTitle"
                 type="text"
                 placeholder="Loan Title"
-                className="w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("LoanTitle", {
                   required: "Loan Title is required",
                 })}
@@ -70,14 +76,14 @@ const AddLoan = () => {
               )}
 
               {/* Description */}
-              <label htmlFor="Description" className="block text-gray-600">
+              <label htmlFor="Description" className="block font-bold">
                 Description
               </label>
               <input
                 id="Description"
                 type="text"
                 placeholder="Description"
-                className="w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("Description", {
                   required: "Description is required",
                 })}
@@ -91,14 +97,14 @@ const AddLoan = () => {
 
             {/* Category */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="Category" className="block text-gray-600">
+              <label htmlFor="Category" className="block font-bold">
                 Category
               </label>
               <input
                 id="Category"
                 type="text"
                 placeholder="Category"
-                className="w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("Category", { required: "Category is required" })}
               />
               {errors.category && (
@@ -110,14 +116,14 @@ const AddLoan = () => {
 
             {/* Email */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="email" className="block text-gray-600">
+              <label htmlFor="email" className="block font-bold">
                 Email
               </label>
               <input
                 id="email"
                 type="email"
                 placeholder="Email"
-                className="w-full px-4 py-3 border border-lime-300 rounded-md focus:outline-lime-500 bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -132,14 +138,14 @@ const AddLoan = () => {
             </div>
 
             <div className="space-y-1 text-sm">
-              <label htmlFor="EMIPlans" className="block text-gray-600">
+              <label htmlFor="EMIPlans" className="block font-bold">
                 EMI Plans
               </label>
               <input
                 id="EMIPlans"
                 type="text"
                 placeholder="12 Months"
-                className="w-full px-4 py-3 border border-lime-300 rounded-md focus:outline-lime-500 bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("EMIPlans", { required: "EMI Plan is required" })}
               />
               {errors.EMIPlans && (
@@ -154,14 +160,14 @@ const AddLoan = () => {
             <div className="flex justify-between gap-2">
               {/* Interest Rate */}
               <div className="space-y-1 text-sm">
-                <label htmlFor="InterestRate" className="block text-gray-600">
+                <label htmlFor="InterestRate" className="block font-bold">
                   Interest Rate
                 </label>
                 <input
                   id="InterestRate"
                   type="number"
                   placeholder="Interest Rate %"
-                  className="w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white"
+                  className="w-full p-2 border border-gray-300 rounded"
                   {...register("InterestRate", {
                     required: "Interest Rate is required",
                     min: {
@@ -179,14 +185,14 @@ const AddLoan = () => {
 
               {/* Max Limit */}
               <div className="space-y-1 text-sm">
-                <label htmlFor="MaxLoanLimit" className="block text-gray-600">
+                <label htmlFor="MaxLoanLimit" className="block font-bold">
                   Max Limit
                 </label>
                 <input
                   id="MaxLoanLimit"
                   type="number"
                   placeholder="Max Limit"
-                  className="w-full px-4 py-3 text-gray-800 border border-lime-300 focus:outline-lime-500 rounded-md bg-white"
+                  className="w-full p-2 border border-gray-300 rounded"
                   {...register("MaxLoanLimit", {
                     required: "Max Limit is required",
                     min: { value: 1, message: "Max Limit must be at least 1" },
@@ -202,14 +208,14 @@ const AddLoan = () => {
 
             {/* Image URL */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="ImagesUrl" className="block text-gray-600">
+              <label htmlFor="ImagesUrl" className="block font-bold">
                 Image URL
               </label>
               <input
                 id="ImagesUrl"
                 type="text"
                 placeholder="https://example.com/image.jpg"
-                className="w-full px-4 py-3 border border-lime-300 rounded-md focus:outline-lime-500 bg-white"
+                className="w-full p-2 border border-gray-300 rounded"
                 {...register("ImagesUrl", {
                   required: "Image URL is required",
                 })}
@@ -229,7 +235,7 @@ const AddLoan = () => {
                 className="w-5 h-5"
                 {...register("show On Home Toggle")}
               />
-              <label htmlFor="showOnHomeToggle" className="text-gray-600">
+              <label htmlFor="showOnHomeToggle" className="font-bold">
                 Show on Home
               </label>
             </div>

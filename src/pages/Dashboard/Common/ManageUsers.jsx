@@ -4,7 +4,7 @@ const ManageUsers = () => {
   const [loans, setLoans] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("https://backend-bay-tau-10.vercel.app/user")
       .then((res) => res.json())
       .then((data) => setLoans(data))
       .catch((err) => console.error(err));
@@ -16,18 +16,18 @@ const ManageUsers = () => {
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50 text-center">
-            <tr>
-              <th className="px-6  text-center py-3 border text-xs font-bold  uppercase tracking-wider">
+            <tr className="bg-blue-500 text-white  font-bold">
+              <th className="px-6  text-center py-3 border text-xs   uppercase tracking-wider">
                 Name
               </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
+              <th className="px-6 py-3 border text-center text-xs  uppercase tracking-wider">
                 Email
               </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
+              <th className="px-6 py-3 border text-center text-xs  uppercase tracking-wider">
                 Role
               </th>
 
-              <th className="px-6 py-3  border text-center text-xs font-bold uppercase tracking-wider">
+              <th className="px-6 py-3  border text-center text-xs uppercase tracking-wider">
                 Actions
               </th>
             </tr>
