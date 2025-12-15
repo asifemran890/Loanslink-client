@@ -55,7 +55,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost lg:hidden"
+            className="btn btn-ghost  "
             aria-label="Menu"
           >
             {/* Hamburger icon */}
@@ -87,15 +87,18 @@ const Navbar = () => {
         </div>
         {/* Logo & Title */}
         <Link to="/" className="flex items-center gap-2">
+          {/* Logo: only visible on large screens */}
           <img
             src={loanlink}
             alt="Logo"
-            className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 object-cover rounded-lg"
+            className="hidden lg:block w-14 h-14 object-cover rounded-lg"
           />
+
           {/* Mobile title */}
           <h1 className="font-bold text-2xl lg:hidden">LoanLink</h1>
+
           {/* Desktop title */}
-          <div className="hidden sm:block">
+          <div className="hidden lg:block">
             <h1 className="font-bold text-2xl text-yellow-500">LoanLink</h1>
           </div>
         </Link>
@@ -116,7 +119,7 @@ const Navbar = () => {
           {theme === "dark" ? (
             /* Sun icon */
             <svg
-              className="swap-off h-10 w-10 fill-current md:hidden"
+              className="swap-off h-10 w-10 fill-current "
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
