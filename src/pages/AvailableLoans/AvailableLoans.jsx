@@ -11,7 +11,7 @@ const AvailableLoans = () => {
       const result = await axios(
         `https://backend-bay-tau-10.vercel.app/latest-loans`
       );
-      console.log(result);
+
       return result.data;
     },
   });
