@@ -11,8 +11,8 @@ import { ThemeProvider } from "./Theme/ThemeContext.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
-  <div>
-    <ThemeProvider >
+  <>
+    <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <RouterProvider router={router} />
@@ -21,5 +21,5 @@ createRoot(document.getElementById("root")).render(
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
-  </div>
+  </>
 );
