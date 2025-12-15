@@ -109,7 +109,7 @@ export default function PendingApplications() {
                 <td className="px-1 border py-4 whitespace-nowrap flex justify-center space-x-2">
                   {/* Buttons */}
                   <button
-                    className="bg-green-500 text-white px-3 py-1 rounded"
+                    className="bg-slate-700 text-white px-3 py-1 rounded"
                     onClick={() => handleApprove(loan._id)}
                   >
                     Approve

@@ -242,7 +242,7 @@ const AddLoan = () => {
 
             <button
               type="submit"
-              className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white rounded shadow-md bg-lime-500"
+              className="w-full bg-slate-700 cursor-pointer p-3 mt-5 text-center font-medium text-white rounded shadow-md "
             >
               Add Loan
             </button>
