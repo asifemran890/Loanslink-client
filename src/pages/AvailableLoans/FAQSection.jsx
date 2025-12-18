@@ -43,7 +43,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-16 lg:py-24 w-7xl mx-auto bg-slate-300 rounded-2xl ">
+    <section className="py-16 lg:py-24 w-7xl mx-auto bg-green-100 rounded-2xl ">
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           {/* Left Content (Title, Description, and Callout) */}
@@ -53,19 +53,19 @@ const FAQSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-black text-foreground md:text-4xl">
               Frequently Asked Questions
             </h2>
-            <p className="mb-6 text-muted-foreground">
+            <p className="mb-6 text-muted-foreground text-black ">
               Find answers to common questions about our loan products and
               application process. Can't find what you're looking for? Contact
               our support team.
             </p>
             <div className="rounded-2xl bg-purple-100  p-6">
-              <h3 className="mb-2 font-semibold text-foreground">
+              <h3 className="mb-2 font-semibold text-black  text-foreground">
                 Still have questions?
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground text-black ">
                 Our customer support team is available 24/7 to help you with any
                 questions or concerns.
               </p>
@@ -83,24 +83,24 @@ const FAQSection = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="rounded-xl border border-[#E1E7EF]  overflow-hidden bg-white dark:bg-gray-800 shadow-sm"
+                className="rounded-xl border border-[#E1E7EF] text-black  overflow-hidden bg-white  shadow-sm"
               >
                 {/* Accordion Header/Button */}
                 <button
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-answer-${index}`}
-                  className="flex w-full items-center justify-between p-5 text-left transition-colors duration-200 hover:bg-[#F9FAFB] dark:hover:bg-gray-700"
+                  className="flex w-full items-center justify-between text-black p-5 text-left transition-colors duration-200 hover:bg-[#F9FAFB] "
                 >
-                  <span className="font-semibold text-lg pr-4 text-foreground dark:text-white">
+                  <span className="font-semibold text-black text-lg pr-4 text-foreground dark:text-white">
                     {faq.question}
                   </span>
                   {/* Plus/Minus Icon */}
                   <div
-                    className={`shrink-0 rounded-full p-1 transition-colors ${
+                    className={`shrink-0 rounded-full p-1  text-black transition-colors ${
                       openIndex === index
-                        ? "bg-indigo-600 text-white" // Using indigo for primary for better contrast
-                        : "bg-[#F1F5F9]  dark:text-indigo-400"
+                        ? "bg-indigo-600 text-black" // Using indigo for primary for better contrast
+                        : "bg-[#2886e4] text-black "
                     }`}
                   >
                     {openIndex === index ? (
@@ -120,9 +120,9 @@ const FAQSection = () => {
                     opacity: openIndex === index ? 1 : 0,
                   }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden"
+                  className="overflow-hidden text-black"
                 >
-                  <p className="px-5 pb-5 text-muted-foreground ">
+                  <p className="px-5 pb-5 text-muted-foreground text-black ">
                     {faq.answer}
                   </p>
                 </motion.div>

@@ -86,6 +86,11 @@ const Sidebar = () => {
                       address="pending-applications"
                     />
                     <MenuItem
+                      icon={MdHomeWork}
+                      label="Approved Loans"
+                      address="approved-loans"
+                    />
+                    <MenuItem
                       icon={FcSettings}
                       label="Profile"
                       address="/dashboard/profile"
@@ -104,6 +109,17 @@ const Sidebar = () => {
                       icon={FaUsers}
                       label="Manage Users"
                       address="/dashboard/manage-users"
+                    />
+                    <MenuItem
+                      icon={MdHomeWork}
+                      label="Loan Applications"
+                      address="loan-applications"
+                    />
+
+                    <MenuItem
+                      icon={FcSettings}
+                      label="Profile"
+                      address="/dashboard/profile"
                     />
                   </>
                 )}
@@ -125,5 +141,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-

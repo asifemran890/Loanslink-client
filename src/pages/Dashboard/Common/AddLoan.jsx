@@ -57,15 +57,15 @@ const AddLoan = () => {
           <div className="space-y-6">
             {/* Loan Title */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="LoanTitle" className="block font-bold  ">
+              <label htmlFor="title" className="block font-bold  ">
                 Loan Title
               </label>
               <input
-                id="LoanTitle"
+                id="title"
                 type="text"
                 placeholder="Loan Title"
                 className="w-full p-2 border border-gray-300 rounded"
-                {...register("LoanTitle", {
+                {...register("title", {
                   required: "Loan Title is required",
                 })}
               />
@@ -76,15 +76,15 @@ const AddLoan = () => {
               )}
 
               {/* Description */}
-              <label htmlFor="Description" className="block font-bold">
+              <label htmlFor="short_description" className="block font-bold">
                 Description
               </label>
               <input
-                id="Description"
+                id="short_description"
                 type="text"
                 placeholder="Description"
                 className="w-full p-2 border border-gray-300 rounded"
-                {...register("Description", {
+                {...register("short_description", {
                   required: "Description is required",
                 })}
               />
@@ -97,15 +97,17 @@ const AddLoan = () => {
 
             {/* Category */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="Category" className="block font-bold">
+              <label htmlFor="loan_category" className="block font-bold">
                 Category
               </label>
               <input
-                id="Category"
+                id="loan_category"
                 type="text"
                 placeholder="Category"
                 className="w-full p-2 border border-gray-300 rounded"
-                {...register("Category", { required: "Category is required" })}
+                {...register("loan_category", {
+                  required: "Category is required",
+                })}
               />
               {errors.category && (
                 <p className="text-xs text-red-500">
@@ -138,15 +140,17 @@ const AddLoan = () => {
             </div>
 
             <div className="space-y-1 text-sm">
-              <label htmlFor="EMIPlans" className="block font-bold">
+              <label htmlFor="available_emi_plan" className="block font-bold">
                 EMI Plans
               </label>
               <input
-                id="EMIPlans"
+                id="available_emi_plan"
                 type="text"
                 placeholder="12 Months"
                 className="w-full p-2 border border-gray-300 rounded"
-                {...register("EMIPlans", { required: "EMI Plan is required" })}
+                {...register("available_emi_plan", {
+                  required: "EMI Plan is required",
+                })}
               />
               {errors.EMIPlans && (
                 <p className="text-xs text-red-500">
@@ -160,15 +164,15 @@ const AddLoan = () => {
             <div className="flex justify-between gap-2">
               {/* Interest Rate */}
               <div className="space-y-1 text-sm">
-                <label htmlFor="InterestRate" className="block font-bold">
+                <label htmlFor="interest_rate" className="block font-bold">
                   Interest Rate
                 </label>
                 <input
-                  id="InterestRate"
+                  id="interest_rate"
                   type="number"
                   placeholder="Interest Rate %"
                   className="w-full p-2 border border-gray-300 rounded"
-                  {...register("InterestRate", {
+                  {...register("interest_rate", {
                     required: "Interest Rate is required",
                     min: {
                       value: 0,
@@ -185,15 +189,15 @@ const AddLoan = () => {
 
               {/* Max Limit */}
               <div className="space-y-1 text-sm">
-                <label htmlFor="MaxLoanLimit" className="block font-bold">
+                <label htmlFor="max_loan_limit" className="block font-bold">
                   Max Limit
                 </label>
                 <input
-                  id="MaxLoanLimit"
+                  id="max_loan_limit"
                   type="number"
                   placeholder="Max Limit"
                   className="w-full p-2 border border-gray-300 rounded"
-                  {...register("MaxLoanLimit", {
+                  {...register("max_loan_limit", {
                     required: "Max Limit is required",
                     min: { value: 1, message: "Max Limit must be at least 1" },
                   })}
@@ -208,15 +212,15 @@ const AddLoan = () => {
 
             {/* Image URL */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="ImagesUrl" className="block font-bold">
+              <label htmlFor="image" className="block font-bold">
                 Image URL
               </label>
               <input
-                id="ImagesUrl"
+                id="image"
                 type="text"
                 placeholder="https://example.com/image.jpg"
                 className="w-full p-2 border border-gray-300 rounded"
-                {...register("ImagesUrl", {
+                {...register("image", {
                   required: "Image URL is required",
                 })}
               />
@@ -230,12 +234,12 @@ const AddLoan = () => {
             {/* Show on Home Toggle */}
             <div className="flex items-center gap-3">
               <input
-                id="showOnHomeToggle"
+                id="showOnHome"
                 type="checkbox"
                 className="w-5 h-5"
-                {...register("show On Home Toggle")}
+                {...register("showOnHome")}
               />
-              <label htmlFor="showOnHomeToggle" className="font-bold">
+              <label htmlFor="showOnHome" className="font-bold">
                 Show on Home
               </label>
             </div>

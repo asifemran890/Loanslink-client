@@ -1,128 +1,289 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useTheme } from "../../../Theme/ThemeContext";
+import Loading from "../../../components/Shared/LoadingSpinner";
 
-export default function PendingApplications() {
-  const [loans, setLoans] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedLoan, setSelectedLoan] = useState(null);
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
 
-  useEffect(() => {
-    fetch("https://backend-bay-tau-10.vercel.app/loanapplication")
-      .then((res) => res.json())
-      .then((data) => setLoans(data))
-      .catch((err) => console.error(err));
-  }, []);
+const ViewLoanDetailsModal = ({ loan, onClose }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
-  const handleApprove = async (loanId) => {
-    const timestamp = new Date().toISOString();
-    await fetch(
-      `https://backend-bay-tau-10.vercel.app/loanapplication/${loanId}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Approved", approvedAt: timestamp }),
+  const modalBg = isDark ? "bg-gray-800 text-white" : "bg-white text-gray-900";
+  const headerColor = isDark ? "text-blue-400" : "text-blue-700";
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+      <div
+        className={`p-8 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all ${modalBg}`}
+      >
+        <h3 className={`text-3xl font-bold mb-4 pb-2 border-b ${headerColor}`}>
+          Loan Application Details
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          {/* --- Loan Information --- */}
+          <div>
+            <h4 className="font-bold text-lg mb-2 border-l-4 border-teal-500 pl-2">
+              Loan Overview
+            </h4>
+            <p>
+              <strong>Title:</strong> {loan.loanTitle}
+            </p>
+            <p>
+              <strong>Category:</strong>{" "}
+              {loan.loan_category || loan.loan_category}
+            </p>
+            <p>
+              <strong>Amount:</strong> $
+              {loan.loanAmount?.toLocaleString("en-US")}
+            </p>
+            <p>
+              <strong>Interest:</strong> {loan.interestRate}%
+            </p>
+            <p>
+              <strong>Applied At:</strong>{" "}
+              {new Date(loan.appliedAt).toLocaleString()}
+            </p>
+          </div>
+
+          {/* --- User Information --- */}
+          <div>
+            <h4 className="font-bold text-lg mb-2 border-l-4 border-teal-500 pl-2">
+              Borrower Info
+            </h4>
+            <p>
+              <strong>Email:</strong> {loan.userEmail}
+            </p>
+            <p>
+              <strong>Contact:</strong> {loan.contactNumber || "N/A"}
+            </p>
+            <p>
+              <strong>Address:</strong> {loan.address || "N/A"}
+            </p>
+            <p>
+              <strong>NID/ID:</strong> {loan.nidPassport || "N/A"}
+            </p>
+          </div>
+
+          {/* --- Status & Documents --- */}
+          <div className="col-span-1 md:col-span-2 mt-4">
+            <h4 className="font-bold text-lg mb-2 border-l-4 border-red-500 pl-2">
+              Application Status
+            </h4>
+            <p>
+              <strong>Current Status:</strong>{" "}
+              <span
+                className={`font-semibold p-1 rounded ${
+                  loan.status === "Pending"
+                    ? "bg-yellow-100 text-yellow-800"
+                    : loan.status === "Approved"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-red-100 text-red-800"
+                }`}
+              >
+                {loan.status}
+              </span>
+            </p>
+
+            <h4 className="font-bold text-lg mb-2 mt-4 border-l-4 border-purple-500 pl-2">
+              Required Documents
+            </h4>
+            <ul className="list-disc list-inside ml-4">
+              {loan.requiredDocuments?.length > 0 ? (
+                loan.requiredDocuments.map((doc, index) => (
+                  <li key={index}>{doc}</li>
+                ))
+              ) : (
+                <li>No specific documents listed in application data.</li>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <button
+            onClick={onClose}
+            className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PendingApplications = () => {
+  const axiosSecure = useAxiosSecure();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const queryClient = useQueryClient();
+
+  // State for View Modal
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [loanToView, setLoanToView] = useState(null);
+
+  // --- Data Fetching: Fetch only Pending Loans ---
+  const {
+    data: pendingApplications = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["pendingLoans"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/loanapplication");
+      return res.data;
+    },
+    onError: (err) => {
+      console.error("Fetch Error:", err);
+      Swal.fire("Error", "Failed to load pending loan applications.", "error");
+    },
+  });
+
+  const statusMutation = useMutation({
+    mutationFn: ({ id, status }) => {
+      return axiosSecure.patch(`/loanapplication/${id}/status`, { status });
+    },
+    onSuccess: (data, variables) => {
+      const action = variables.status === "Approved" ? "approved" : "rejected";
+      Swal.fire(
+        "Success!",
+        `Loan application ${data.loanTitle} has been ${action}.`,
+        "success"
+      );
+      queryClient.invalidateQueries(["pendingLoans"]);
+    },
+    onError: (err) => {
+      console.error("Mutation Error:", err);
+      Swal.fire("Error", "Failed to update loan status.", "error");
+    },
+  });
+
+  const handleApprove = (id, loanTitle) => {
+    Swal.fire({
+      title: `Approve Loan: ${loanTitle}?`,
+      text: "This action will set the status to Approved.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#10B981",
+      confirmButtonText: "Yes, Approve it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        statusMutation.mutate({ id, status: "Approved" });
       }
-    );
-    // Refresh data after update
-    setLoans((prevLoans) =>
-      prevLoans.map((loan) =>
-        loan._id === loanId
-          ? { ...loan, status: "Approved", approvedAt: timestamp }
-          : loan
-      )
-    );
+    });
   };
 
-  const handleReject = async (loanId) => {
-    await fetch(
-      `https://backend-bay-tau-10.vercel.app/loanapplication/${loanId}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Rejected" }),
+  const handleReject = (id, loanTitle) => {
+    Swal.fire({
+      title: `Reject Loan: ${loanTitle}?`,
+      text: "This action will set the status to Rejected.",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonColor: "#EF4444",
+      confirmButtonText: "Yes, Reject it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        statusMutation.mutate({ id, status: "Rejected" });
       }
-    );
-    // Refresh data after update
-    setLoans((prevLoans) =>
-      prevLoans.map((loan) =>
-        loan._id === loanId ? { ...loan, status: "Rejected" } : loan
-      )
-    );
+    });
   };
 
   const handleView = (loan) => {
-    setSelectedLoan(loan);
-    setShowModal(true);
+    setLoanToView(loan);
+    setIsViewModalOpen(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedLoan(null);
-  };
+  const tableBg = isDark
+    ? "bg-gray-800 text-gray-200"
+    : "bg-white text-gray-800";
+  const headerBg = isDark
+    ? "bg-gray-700 text-white"
+    : "bg-gray-200 text-gray-800";
+
+  if (isLoading)
+    return (
+      <p className="text-center py-10 text-xl">
+        <Loading></Loading>
+      </p>
+    );
+  if (isError)
+    return (
+      <p className="text-center py-10 text-red-600">Error loading data.</p>
+    );
+  if (pendingApplications.length === 0)
+    return (
+      <p className="text-center py-10 text-xl">
+        ✅ No pending loan applications found.
+      </p>
+    );
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">
-        Pending Applications
-      </h1>
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-blue-500 text-white  font-bold">
-            <tr>
-              <th className="px-6  text-center py-3 border text-xs font-bold  uppercase tracking-wider">
-                Loan ID
-              </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
-                User Info
-              </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
-                Amount
-              </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold  uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 border text-center text-xs font-bold uppercase tracking-wider">
-                Actions
-              </th>
+    <div
+      className={`${
+        isDark ? "bg-gray-900 text-white" : "bg-green-100 text-gray-900"
+      } min-h-screen p-6`}
+    >
+      <h2 className="text-3xl font-bold mb-6 text-center">
+        ⏳ Pending Loan Applications ({pendingApplications.length})
+      </h2>
+
+      <div className="overflow-x-auto shadow-lg rounded-lg">
+        <table className={`min-w-full table-auto border ${tableBg}`}>
+          <thead>
+            <tr className={`${headerBg}`}>
+              <th className="border px-4 py-3 text-left">Loan ID</th>
+              <th className="border px-4 py-3 text-left">User Info</th>
+              <th className="border px-4 py-3 text-right">Amount</th>
+              <th className="border px-4 py-3 text-left">Date Applied</th>
+              <th className="border px-4 py-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {loans.map((loan) => (
-              <tr key={loan._id}>
-                <td className="px-1 border text-center py-4 whitespace-nowrap">
-                  {loan._id}
+          <tbody>
+            {pendingApplications.map((loan) => (
+              <tr
+                key={loan._id}
+                className={`${
+                  isDark
+                    ? "hover:bg-gray-700 border-gray-700"
+                    : "hover:bg-gray-100 border-gray-300"
+                } border-b`}
+              >
+                <td className="px-4 py-3 truncate max-w-xs">{loan._id}</td>
+                <td className="px-4 py-3">
+                  <p className="text-sm text-gray-500">{loan.email}</p>
                 </td>
-                <td className="px-1 py-4 text-center border whitespace-nowrap text-sm text-gray-500">
-                  {loan.name} , {loan.email}
+                <td className="px-4 py-3 text-right">
+                  ${loan.loanAmount?.toLocaleString("en-US") || "N/A"}
                 </td>
-                <td className=" py-4 border text-center  whitespace-nowrap">
-                  {loan.loanAmount}
-                </td>
-                <td className="px-1 border py-4 whitespace-nowrap">
-                  {loan.createdAt}
-                </td>
-                <td className="px-1 border  whitespace-nowrap">
-                  {loan.status}
-                </td>
-                <td className="px-1 border py-4 whitespace-nowrap flex justify-center space-x-2">
-                  {/* Buttons */}
+                <td className="px-4 py-3">{formatDate(loan.appliedAt)}</td>
+                <td className="px-4 py-3 flex gap-2 justify-center">
                   <button
-                    className="bg-slate-700 text-white px-3 py-1 rounded"
-                    onClick={() => handleApprove(loan._id)}
+                    onClick={() => handleApprove(loan._id, loan.loanTitle)}
+                    disabled={statusMutation.isLoading}
+                    className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors disabled:opacity-50"
                   >
                     Approve
                   </button>
                   <button
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                    onClick={() => handleReject(loan._id)}
+                    onClick={() => handleReject(loan._id, loan.loanTitle)}
+                    disabled={statusMutation.isLoading}
+                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition-colors disabled:opacity-50"
                   >
                     Reject
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-3 py-1 rounded"
                     onClick={() => handleView(loan)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
                   >
                     View
                   </button>
@@ -133,39 +294,14 @@ export default function PendingApplications() {
         </table>
       </div>
 
-      {/* Modal for viewing loan details */}
-      {showModal && selectedLoan && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-lg w-full relative">
-            <button
-              className="absolute top-2 right-2 text-gray-600"
-              onClick={closeModal}
-            >
-              ✖
-            </button>
-            <h2 className="text-xl font-bold mb-4">Loan Details</h2>
-            <p>
-              <strong>Loan ID:</strong> {selectedLoan._id}
-            </p>
-            <p>
-              <strong>Name:</strong> {selectedLoan.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {selectedLoan.email}
-            </p>
-            <p>
-              <strong>Amount:</strong> {selectedLoan.loanAmount}
-            </p>
-            <p>
-              <strong>Date:</strong> {selectedLoan.createdAt}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedLoan.status}
-            </p>
-            {/* Add more details as needed */}
-          </div>
-        </div>
+      {isViewModalOpen && loanToView && (
+        <ViewLoanDetailsModal
+          loan={loanToView}
+          onClose={() => setIsViewModalOpen(false)}
+        />
       )}
     </div>
   );
-}
+};
+
+export default PendingApplications;

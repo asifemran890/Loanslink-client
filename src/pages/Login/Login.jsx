@@ -134,7 +134,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="btn btn-accent btn-outline w-full rounded-md py-3 "
+              className="btn-primary  btn-outline w-full rounded-md py-3 "
             >
               {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />

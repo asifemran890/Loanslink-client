@@ -22,7 +22,7 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const name = form.name.value;
+    const displayName = form.displayName.value;
     const email = form.email.value;
     const password = form.password.value;
     const photoURL = form.photoURL.value;
@@ -49,8 +49,8 @@ const SignUp = () => {
       const result = await createUser(email, password);
 
       // 2. Update name + photoURL
-      await updateUserProfile(name, photoURL);
-      await saveOrUpdateUser({ name, photoURL, email });
+      await updateUserProfile(displayName, photoURL);
+      await saveOrUpdateUser({ displayName, photoURL, email });
       console.log(result);
 
       toast.success("Signup Successful!");
@@ -113,7 +113,7 @@ const SignUp = () => {
               <label className="block mb-2 text-sm">Name</label>
               <input
                 type="text"
-                name="name"
+                name="displayName"
                 placeholder="Enter Your Name Here"
                 required
                 className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300"
@@ -159,7 +159,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="btn btn-accent btn-outline w-full rounded-md py-3 "
+            className="btn-primary  btn-outline w-full rounded-md py-3 "
           >
             Continue
           </button>

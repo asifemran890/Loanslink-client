@@ -12,7 +12,7 @@ const ThemeToggle = () => {
             title="Toggle Theme"
         >
 
-            {theme === "light" ? <FiMoon className="h-6 w-6 text-amber-800" /> : <FiSun className="h-6 w-6" />}
+            {theme === "light" ? <FiMoon className="h-6 w-6 " /> : <FiSun className="h-6 w-6" />}
         </button>
     );
 };

@@ -5,7 +5,7 @@ import { FaTrash } from "react-icons/fa6";
 const ManageLoansDetails = ({ loan }) => {
   const [loans, setLoans] = useState([]);
 
-  const { InterestRate, LoanTitle, Category, ImagesUrl, _id } = loan || {};
+  const { title, loan_category, image, interest_rate, _id } = loan || {};
   const handleDelete = async () => {
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
@@ -34,16 +34,16 @@ const ManageLoansDetails = ({ loan }) => {
   return (
     <tr>
       <td className=" px-5 py-3 bg-white  border  text-gray-800  ">
-        <img className="h-20 w-full" src={ImagesUrl} alt="img" />
+        <img className="h-20 w-full" src={image} alt="img" />
       </td>
       <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
-        <p className="text-gray-900 ">{LoanTitle}</p>
+        <p className="text-gray-900 ">{title}</p>
       </td>
       <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
-        <p className="text-gray-900 ">{Category}</p>
+        <p className="text-gray-900 ">{loan_category}</p>
       </td>
       <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
-        <p className="text-gray-900 ">{InterestRate}</p>
+        <p className="text-gray-900 ">{interest_rate}</p>
       </td>
 
       <td className="px-5 py-3 bg-white  border  text-gray-800  text-center text-sm uppercase font-normal">
