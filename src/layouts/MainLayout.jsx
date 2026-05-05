@@ -8,12 +8,12 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen ">
       {/* Navbar */}
-      <header >
+      <header>
         <Navbar />
       </header>
 
       {/* Page Content */}
-      <main >
+      <main className=" min-h-[calc(100vh-68px)]">
         <Outlet />
       </main>
 

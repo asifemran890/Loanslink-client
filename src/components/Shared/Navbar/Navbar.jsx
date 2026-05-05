@@ -239,7 +239,7 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 backdrop-blur transition-colors duration-300 text-white ${
+        className={` top-0 z-40 backdrop-blur transition-colors duration-300 text-white ${
           isDark
             ? "bg-gradient-to-r from-gray-950 via-gray-900 to-emerald-950"
             : "bg-gradient-to-r from-fuchsia-300 via-fuchsia-400 to-fuchsia-300"
