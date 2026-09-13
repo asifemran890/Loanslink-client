@@ -2,14 +2,14 @@ import { Link } from "react-router";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import Card from "./card";
+import Card from "./Card";
 
 const AvailableLoans = () => {
   const { data: loans = [], isLoading } = useQuery({
     queryKey: ["loans"],
     queryFn: async () => {
       const result = await axios(
-        `https://backend-bay-tau-10.vercel.app/latest-loans`
+        `https://backend-bay-tau-10.vercel.app/latest-loans`,
       );
 
       return result.data;
